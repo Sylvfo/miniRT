@@ -1,0 +1,28 @@
+parsing
+
+take a file .rt as an arguement
+
+open, read, close
+
+check all informations...
+
+initialisation:
+what type of data structure to do?
+-pumkin?
+-where to store data struct when moving objects?
+
+
+what type of errors can occure?
+
+-data take / change -> calculation -> show in window -> change / exit
+
+-with what keyboard keys or mouse are we change it?
+
+See in FDF how to do a window...
+
+
+How can we change the lights, move objects...
+
+finishing:
+free all data struct
+read again fonction exit. 

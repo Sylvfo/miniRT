@@ -1,0 +1,39 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    info_and_structures.txt                            :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: marvin <marvin@student.42.fr>              +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2024/12/08 13:45:37 by marvin            #+#    #+#              #
+#    Updated: 2024/12/08 13:45:37 by marvin           ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
+comment ça marche??
+
+ce que le programme fait:
+
+transformation:
+objects=
+-translation
+-rotation (not for sphères)
+resize
+-diamètre for sphères
+-high and width for cylindres
+
+lights=
+-translation
+
+camera=
+-translation
+-rotation
+
+
+change couleurs?
+
+display image window:
+images:
+calcul des formes
+calcul lumière
+calcul caméra et point de vue
