@@ -5,6 +5,9 @@ take a file .rt as an arguement
 open, read, close
 
 check all informations...
+1 identifier only A, C, L, sp, pl, cy
+xyz coordinates : if ok for this element, 
+
 
 initialisation:
 what type of data structure to do?
@@ -26,3 +29,6 @@ How can we change the lights, move objects...
 finishing:
 free all data struct
 read again fonction exit. 
+
+rotation of camera or plan?
+
