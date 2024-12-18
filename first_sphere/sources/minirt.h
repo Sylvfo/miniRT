@@ -6,7 +6,7 @@
 /*   By: sforster <sforster@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 11:03:17 by sforster          #+#    #+#             */
-/*   Updated: 2024/12/18 17:19:35 by sforster         ###   ########.fr       */
+/*   Updated: 2024/12/18 18:20:52 by sforster         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,7 @@ typedef struct s_image {
 	int				endian;
 	void			*mlx_ptr;
 	void			*mlx_win;
+	t_view			*global;
 }	t_image;
 
 //main.c
@@ -82,8 +83,9 @@ void	test_print(t_pix *pix, int x, int y);
 void	CanvasToViewport(float Cx, float Cy, t_pix *pix);
 
 //init_image.c
-t_image *init_image(void);
-
+t_image *init_image(t_view *global);
+void	color_image(t_view *global, t_image *ima);
+void	my_mlx_pixel_put(t_image *ima, int x, int y, int color);
 
 //pixelPut
 int	ft_keys(int keycode, t_image *ima);

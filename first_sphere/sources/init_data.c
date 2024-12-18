@@ -6,7 +6,7 @@
 /*   By: sforster <sforster@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/18 09:31:43 by sforster          #+#    #+#             */
-/*   Updated: 2024/12/18 16:39:51 by sforster         ###   ########.fr       */
+/*   Updated: 2024/12/18 18:30:31 by sforster         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,8 +96,8 @@ t_view	*init_global(void)
 	global->camera[0] = 0;
 	global->camera[1] = 0;
 	global->camera[2] = 0;
-	global->caneva_width = 5;
-	global->caneva_height = 5;
+	global->caneva_width = 500;
+	global->caneva_height = 500;
 	global->view_width = 2000; // ?????
 	global->view_height = 1500; // ?????????
 	global->Vz = 100;
