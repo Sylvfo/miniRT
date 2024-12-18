@@ -1,0 +1,106 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    ancien_init.txt                                    :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: sforster <sforster@student.42.fr>          +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2024/12/18 09:31:43 by sforster          #+#    #+#              #
+#    Updated: 2024/12/18 15:04:50 by sforster         ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
+# include "minirt.h"
+
+t_pix	**init_data(void)
+{
+	t_view 	*global;
+	t_pix	**pix;
+
+	global = NULL;
+	pix = NULL;
+	global = init_global();
+	if (global == NULL)
+		return (NULL);
+	pix = init_pix(pix, global);
+	if (pix == NULL)
+	{
+		free (global);
+		return (NULL);
+	}
+	link_pix_global(pix, global);
+	(void) global;
+	return (pix);
+}
+
+t_pix	**init_pix(t_pix **pix, t_view *global)
+{
+	int	x;
+
+	x = 0;
+	pix = (t_pix **)malloc((global->caneva_width + 1) * sizeof(t_pix *));
+	if (!pix)
+		return (NULL);
+	printf("la\n");
+	while (x < global->caneva_width)
+	{
+		pix[x] = (t_pix *)malloc((global->caneva_height + 1) * sizeof(t_pix));
+		if (!pix[x])
+		{
+			while(x > 0)
+			{
+				x--;
+				free(pix[x]);
+			}
+			free(pix);
+			return (NULL);
+		}
+		x++;
+	}
+	return (pix);
+}
+
+t_view	*init_global(void)
+{
+	t_view *global;
+
+	global = malloc(sizeof(t_view));
+	if (!global)
+		return (NULL);
+	global->camera = malloc(3 * sizeof(int));
+	if (!global->camera)
+	{
+		free (global);
+		return (NULL);
+	}
+	global->camera[0] = 0;
+	global->camera[1] = 0;
+	global->camera[2] = 0;
+	global->caneva_width = 5;
+	global->caneva_height = 5;
+	global->view_width = 2000; // ?????
+	global->view_height = 1500; // ?????????
+	global->Vz = 100;
+	//rapport entre les deux;
+
+	return (global);
+}
+
+void	link_pix_global(t_pix **pix, t_view *global)
+{
+	int x;
+	int y;
+
+	x = 0;
+	while (x < global->caneva_width)
+	{
+		y = 0;
+		while (y < global->caneva_height)
+		{
+			pix[y]->global = global;
+			y++;
+		}
+		x++;
+	}
+	return;
+}

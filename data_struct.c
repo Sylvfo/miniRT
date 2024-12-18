@@ -17,7 +17,7 @@
 
 /*
 POLAR COORDINATE????
-
+POLAR GRID
 
 un point C(2, -5) in 2D
 point P(5, -6, 8) in 3D
@@ -29,6 +29,5 @@ P[5, -6, 8]
 un vecteur 
 
 */
-
-gdgfdfgＤｆｇ
-/*
+                       
+/* 

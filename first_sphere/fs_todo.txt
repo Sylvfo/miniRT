@@ -1,0 +1,16 @@
+faire un main qui peut lire le fichier?
+ou alors faire une data struct avec les spheres?
+
+faire un makefile avec minilibx... =)
+
+makefile:
+voir dossier pour objects +)
+
+-C pour make minilibx??
+
+-commencer la sphere:
+
+
+
+
+

@@ -1,47 +1,35 @@
-NAME			= sphere
-SRCS			= 	main.c \
-#					read_main.c \
+NAME := sphere
+CC := cc
+CFLAGS := #-Wall -Wextra -Werror
+RM := rm -rf
+#a directory for .o
+OBJ_DIR = obj
+SRC_DIR = ./sources
 
-OBJ_DIR 		= obj
-FLAGS			= -Wall -Wextra -Werror -lm
-CC				= gcc
-RM				= rm -f
+MLX_DIR := minilibx_linux
+MLX_INC := -I$(MLX_DIR)
+MLX_LNK := -L$(MLX_DIR) -lmlx -lXext -lX11 -lm 
 
-OBJ = $(patsubst %.c, $(OBJ_DIR)/%.o, $(SRCS))
+#make the all project cleaner. But at the end we have to change the.c by the files names. 
+SRCS =	${shell find ${SRC_DIR} -type f -name '*.c'}\
 
-LIBFT_DIR		= librairies/libft
-LIBFT 			= ./${LIBFT_DIR}/libft.a
-MINILIBX_DIR	= librairies/minilibx_linux
-MINILIBX		= ./${MINILIBX_DIR}/libmlx.a
+OBJS = $(addprefix $(OBJ_DIR)/, $(SRCS:.c=.o))
+$(OBJ_DIR)/%.o: %.c #minirt.h
+	@mkdir -p $(dir $@)
+	$(CC) $(CFLAGS) -C $(MLX_INC) -c $< -o $@
 
 all: $(NAME)
 
-$(NAME): ${OBJ}
-		@(make -s -C ${LIBFT_DIR})
-		@(make -s -C ${MINILIBX_DIR})
-		@(${CC} ${FLAGS} -o $@ $^ ${PRINTF} ${LIBFT} ${MINILIBX}) #OpenGL -framework AppKit
-
-$(OBJ_DIR)/%.o: %.c
-		@(mkdir -p $(OBJ_DIR))
-		@(${CC} ${FLAGS} -c $< -o $@)
-
-
-$(OBJB_DIR)/%.o: %.c
-		mkdir -p $(OBJB_DIR)
-		${CC} ${FLAGS} -c $< -o $@
+$(NAME): $(OBJS)
+	$(CC) $(CFLAGS) -o $(NAME) $(OBJS) $(MLX_LNK)
 
 clean:
-		rm -rf $(OBJ_DIR)
-		make clean -C ${LIBFT_DIR}
-		make clean -C ${MINILIBX_DIR}
-		$(RM) $(OBJB)
-		$(RM) $(OBJ)
+	$(RM) $(OBJ_DIR)
+	$(RM) $(OBJS)
 
-fclean:		clean
-		make fclean -C ${LIBFT_DIR}
-		make clean -C ${MINILIBX_DIR}
-		$(RM) $(NAME)
- 
-re:			fclean	all
+fclean: clean
+	$(RM) -r $(NAME)
 
-.PHONY:		all re clean fclean
+re: fclean all
+
+.PHONY:        all re clean fclean

@@ -1,0 +1,28 @@
+CC := cc
+CFLAGS := -Wall -Wextra -Werror
+RM := rm -rf
+
+MLX_DIR := minilibx_linux
+MLX_INC := -I$(MLX_DIR)
+MLX_LNK := -L$(MLX_DIR) -lmlx -lXext -lX11 -lm 
+
+NAME := miniRT
+
+OBJS:= main.o \
+
+%.o: %.c minirt.h
+	$(CC) $(CFLAGS) $(MLX_INC) -c $< -o $@  
+    
+all: $(NAME)
+
+$(NAME): $(OBJS)
+	$(CC) $(CFLAGS) -o $(NAME) $(OBJS) $(MLX_LNK)
+
+clean:
+	$(RM) $(OBJS)
+
+fclean: clean
+	$(RM) $(NAME)
+
+re: fclean
+	$(MAKE) allS
