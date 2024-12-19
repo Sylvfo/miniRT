@@ -77,7 +77,7 @@ TraceRay(O, D, t_min, t_max)
 			closest_t = t2
 			closest_sphere = sphere
 		}
-		if closest_sphere == NULL {
+		if closest_sphere == NULL {// ok
 			return BACKGROUND_COLOR
 		}
 		return closest_sphere.color
@@ -85,8 +85,9 @@ TraceRay(O, D, t_min, t_max)
 
 IntersectRaySphere(O, D, sphere) 
 {
+
 	r = sphere.radius
-	CO = O - sphere.center
+	CO = O - sphere.center //vector from the center of the sphere to the origin of the ray.
 	a = dot(D, D)
 	b = 2*dot(CO, D)
 	c = dot(CO, CO) - r*r
@@ -106,3 +107,6 @@ quadratique equation avec t1 t2 pour chaque rayon
 soit pas de solution donc ca touche pas
 soit une solution donc tengente
 soit 2 solution donc le rayon entre et sort de la sphere
+
+-revoir les couleurs. 
+-plusieures spheres

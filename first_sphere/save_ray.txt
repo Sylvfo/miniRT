@@ -1,14 +1,14 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   raytracing.c                                       :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: sforster <sforster@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/18 11:55:44 by sforster          #+#    #+#             */
-/*   Updated: 2024/12/19 16:29:16 by sforster         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    save_ray.txt                                       :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: sforster <sforster@student.42.fr>          +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2024/12/18 11:55:44 by sforster          #+#    #+#              #
+#    Updated: 2024/12/19 15:41:03 by sforster         ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
 
 # include "minirt.h"
 
@@ -63,35 +63,30 @@ void TraceRay(t_pix *pix)
 {
 	float closestt = INT_MAX;
 	t_sphere *closest_sphere; // data struc or malloc?? non c est un pointeur
-	int i = 0;
-
+	
 	closest_sphere = NULL;
 //rajouter pour plusieures spheres
-	while (i < 4)
+	IntersectRaySphere(pix);
+	if (pix->t1 < closestt && pix->t1 > 1)
 	{
-		IntersectRaySphere(pix, pix->global->scene->sphere[i]);
-		if (pix->t1 < closestt && pix->t1 > 1)
-		{
-			closestt = pix->t1;
-			closest_sphere = pix->global->scene->sphere[i];
-		}
-		if (pix->t2 < closestt && pix->t2 > 1)
-		{
-			closestt = pix->t2;
-			closest_sphere = pix->global->scene->sphere[i];
-		}
-		if (closest_sphere == NULL)
-		{
-			pix->color = pix->global->backgroundcolor;
-			return ;
-		}
-		pix->color = closest_sphere->color;
-		i++;
+		closestt = pix->t1;
+		closest_sphere = pix->global->sphere1;
 	}
+	if (pix->t2 < closestt && pix->t2 > 1)
+	{
+		closestt = pix->t2;
+		closest_sphere = pix->global->sphere1;
+	}
+	if (closest_sphere == NULL)
+	{
+		pix->color = pix->global->backgroundcolor;
+		return ;
+	}
+	pix->color = pix->global->sphere1->color;
 }
 
 
-void IntersectRaySphere(t_pix *pix, t_sphere *sphere)
+void IntersectRaySphere(t_pix *pix)
 {
 	float discriminant;
 	float a;
@@ -100,12 +95,12 @@ void IntersectRaySphere(t_pix *pix, t_sphere *sphere)
 	t_vect3d *CO;
 
 	CO = malloc(sizeof(t_vect3d));
-	CO->x = -sphere->center->x;
-	CO->y = -sphere->center->y;
-	CO->z = -sphere->center->z;
+	CO->x = -pix->global->sphere1->center->x;
+	CO->y = -pix->global->sphere1->center->y;
+	CO->z = -pix->global->sphere1->center->z;
 	a = dot_product(pix->D, pix->D);
 	b = 2 * dot_product(CO, pix->D);
-	c = dot_product(CO, CO) - (sphere->radius * sphere->radius);
+	c = dot_product(CO, CO) - (pix->global->sphere1->radius * pix->global->sphere1->radius);
 
 	discriminant = (b * b) - (4 * a * c);
 	if (discriminant < 0)

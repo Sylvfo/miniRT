@@ -6,7 +6,7 @@
 /*   By: sforster <sforster@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/18 17:08:38 by sforster          #+#    #+#             */
-/*   Updated: 2024/12/18 18:29:25 by sforster         ###   ########.fr       */
+/*   Updated: 2024/12/19 12:59:30 by sforster         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,16 +26,15 @@ t_image *init_image(t_view *global)
 		return (0);
 
 	ima->mlx_win = mlx_new_window(ima->mlx_ptr, ima->global->caneva_width, ima->global->caneva_height, "Fen fen");
-//	ima->img = mlx_new_image(ima->mlx_ptr, 200, 200);
-//	ima->mlx_win = mlx_new_window(ima->mlx_ptr, ima->global->caneva_width, ima->global->caneva_height, "Fen fen");
 	ima->img = mlx_new_image(ima->mlx_ptr, ima->global->caneva_width, ima->global->caneva_height);
 	ima->addr = mlx_get_data_addr(ima->img, &ima->bits_per_pixel,
 			&ima->line_length, &ima->endian);
-
 	mlx_put_image_to_window(ima->mlx_ptr, ima->mlx_win, ima->img, 0, 0);
-	color_image(global, ima);
-	
+	return (ima);
+}
 
+void image_hooks(t_image *ima)
+{
 	mlx_hook(ima->mlx_win, 2, 1L << 0, ft_keys, ima);
 	mlx_loop(ima->mlx_ptr);
 }
@@ -50,7 +49,7 @@ void	color_image(t_view *global, t_image *ima)
 		y = 0;
 		while (y < ima->global->caneva_height)
 		{
-			mlx_pixel_put(ima->mlx_ptr, ima->mlx_win, x, y, 120);
+			mlx_pixel_put(ima->mlx_ptr, ima->mlx_win, x, y, 65280);
 //			my_mlx_pixel_put(ima, x, y, 2545);
 			y++;
 		}
