@@ -110,3 +110,57 @@ soit 2 solution donc le rayon entre et sort de la sphere
 
 -revoir les couleurs. 
 -plusieures spheres
+
+
+
+LIGHTS :)
+
+
+typedef struct	s_pix {
+	int			Cx; //axe x sur le canvas
+	int			Cy;  //axe y sur la canvas
+	t_vect3d	*D; // vecteur entre camera et coordonnes sur viewport
+	int			color;
+	t_view		*global;
+	float		t1;
+	float		t2;
+} t_pix;
+
+
+
+P = O + closest_t * D
+// Compute intersection
+N = P - closest_sphere.center
+// Compute sphere normal at intersection
+N = N / length(N)
+return closest_sphere.color * ComputeLighting(P, N)
+
+ComputeLighting(P, N) 
+{
+	i = 0.0
+//	for light in scene.Lights 
+//	{
+//		if light.type == ambient 
+//		{
+//			i += light.intensity
+//		}
+//		else 
+//		{
+			if light.type == point 
+			{
+				L = light.position - P
+			}
+//			else
+//			{
+//				L = light.direction
+//			}
+			n_dot_l = dot(N, L)
+			if n_dot_l > 0 
+			{
+				i += light.intensity * n_dot_l/(length(N) * length(L))
+			}
+		}
+	}
+	return i
+}
+

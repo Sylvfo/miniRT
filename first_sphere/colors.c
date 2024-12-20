@@ -14,9 +14,9 @@
 
 void	main(void)
 {
-	int r = 115;
-	int g = 0;
-	int b = 125;
+	int r = 255;
+	int g = 153;
+	int b = 51;
 	int final = r * 65536 +  g * 256 + b;
 	printf("code color is %i\n", final);
 }

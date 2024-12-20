@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raytracing.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sforster <sforster@student.42.fr>          +#+  +:+       +#+        */
+/*   By: syl <syl@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/18 11:55:44 by sforster          #+#    #+#             */
-/*   Updated: 2024/12/19 16:29:16 by sforster         ###   ########.fr       */
+/*   Updated: 2024/12/20 23:14:57 by syl              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,6 @@ void ray_tracing(t_pix ***pix, t_image *ima)
 		y = 0;
 		x++;
 	}
-	printf("try  %fi\n", pix[3][2]->D->x);
-	printf("try  %i\n", pix[2][2]->Cx);
 }
 
 void	CanvasToViewport(float Cx, float Cy, t_pix *pix)  // mettre data dedans Cx et Cy c est les points x y sur le canvas
@@ -85,7 +83,9 @@ void TraceRay(t_pix *pix)
 			pix->color = pix->global->backgroundcolor;
 			return ;
 		}
-		pix->color = closest_sphere->color;
+		// ici ajouter pour calculer la lumiere....
+		ComputeLighting(pix, closestt, closest_sphere);
+		//pix->color = closest_sphere->color;
 		i++;
 	}
 }

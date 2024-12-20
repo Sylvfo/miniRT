@@ -1,0 +1,14 @@
+-light
+
+-norme unit scale....
+
+- put pixel...
+
+- order pixels to image...
+
+-C pour make minilibx??
+
+-libft
+
+-! minilibx sur git???
+

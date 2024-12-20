@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minirt.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sforster <sforster@student.42.fr>          +#+  +:+       +#+        */
+/*   By: syl <syl@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 11:03:17 by sforster          #+#    #+#             */
-/*   Updated: 2024/12/19 16:19:07 by sforster         ###   ########.fr       */
+/*   Updated: 2024/12/20 23:11:54 by syl              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,13 +19,6 @@
 # include <stdio.h>
 # include <stdlib.h>
 # include <limits.h>
-
-/*
-typedef struct	s_vars {
-	void	*mlx;
-	void	*win;
-}				t_vars;
-*/
 
 typedef struct s_3dpoint {
 	float	x;
@@ -45,11 +38,11 @@ typedef struct	s_sphere {
 	int				color;
 }				t_sphere;
 
-
-typedef struct s_scene {
-	t_sphere	**sphere;
-	//autres formes
-} t_scene;
+typedef struct s_spotlight { //bulb??
+	t_3dpoint	*coord;
+	int			ratio;
+//	int			color;	not in mandatory part
+} t_spotlight;
 
 typedef struct	s_plane {
 	t_3dpoint		*point;
@@ -65,8 +58,15 @@ typedef struct	s_cyl {
 	int				color;
 }	t_cyl;
 
+typedef struct s_scene {
+	t_sphere	**sphere;
+	int		ambiant_light_ratio;
+	int		ambiant_light_color;
+	t_spotlight *light1;
+	//autres formes
+} t_scene;
+
 typedef struct	s_view {
-//	int		*camera; // x 0 y 0  z 0 O in the book
 	t_3dpoint	*cam;
 	float	caneva_width;
 	float	caneva_height;
@@ -75,7 +75,6 @@ typedef struct	s_view {
 	int		Vz; //dist du viewport de la camera
 	t_scene		*scene;
 	int 	backgroundcolor;
-//	t_sphere *sphere1;
 	// calculer rapport en canveva et view??
 }				t_view;
 
@@ -86,8 +85,10 @@ typedef struct	s_pix {
 	t_vect3d	*D; // vecteur entre camera et coordonnes sur viewport
 	int			color;
 	t_view		*global;
+	t_scene		*scene;
 	float		t1;
 	float		t2;
+	float		light_int;
 } t_pix;
 
 typedef struct s_image {
@@ -108,8 +109,10 @@ void	link_pix_global(t_pix ***pix, t_view *global);
 t_view	*init_global(void);
 t_pix	***init_pix(t_pix ***pix, t_view *global);
 t_pix	***init_data(void);
-t_scene *init_scene(void);
 
+// init_scene.c
+t_scene *init_scene(void);
+t_spotlight *init_lights(void);
 
 //raytracing.c
 void	ray_tracing(t_pix ***pix, t_image *ima);
@@ -124,12 +127,24 @@ t_image *init_image(t_view *global);
 void	color_image(t_view *global, t_image *ima);
 void	my_mlx_pixel_put(t_image *ima, int x, int y, int color);
 void 	image_hooks(t_image *ima);
+
 //pixelPut
 int	ft_keys(int keycode, t_image *ima);
 int	ft_exit(t_image *ima);
 
 //math.c
 float dot_product(t_vect3d *va, t_vect3d *vb);
+t_vect3d *vect_from_points(t_3dpoint *a, t_3dpoint *b);
+float	lenght_vector(t_vect3d *vect);
+void normalize_vector(t_vect3d *vect);
+t_3dpoint *pointonline(t_pix *pix, float closestt);
+
+
+//light.c
+float ComputeLighting(t_pix *pix, float closestt, t_sphere *closest_sphere);
+float light_intensity(t_3dpoint *P, t_vect3d *N, t_pix *pix);
+float 	compute_spotlight(t_3dpoint *P, t_vect3d *N, t_pix *pix, t_spotlight *light);
+float 	compute_ambient(t_pix *pix);
 
 
 #endif
