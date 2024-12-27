@@ -6,7 +6,7 @@
 /*   By: syl <syl@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/20 18:31:47 by syl               #+#    #+#             */
-/*   Updated: 2024/12/20 18:58:13 by syl              ###   ########.fr       */
+/*   Updated: 2024/12/27 11:10:12 by syl              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@ t_scene *init_scene(void)
 
 	scene->sphere[0] = malloc(sizeof(t_sphere));
 	scene->sphere[0]->center = malloc(sizeof(t_3dpoint));
-	scene->sphere[0]->center->x = 0;
-	scene->sphere[0]->center->y = 200;
+	scene->sphere[0]->center->x = 450;
+	scene->sphere[0]->center->y = 350;
 	scene->sphere[0]->center->z = 200;
 	scene->sphere[0]->color = 7536765;
 	scene->sphere[0]->radius = 300;
@@ -52,7 +52,9 @@ t_scene *init_scene(void)
 	scene->sphere[3]->radius = 25;
 
 	scene->light1 = init_lights();
-
+	
+	scene->ambient_light_ratio = 1;
+//	scene->ambient_light_color = 0.5;
 	return (scene);
 }
 	
@@ -62,9 +64,9 @@ t_spotlight *init_lights(void)
 
 	light1 = malloc(sizeof(t_spotlight));
 	light1->coord = malloc(sizeof(t_3dpoint));
-	light1->ratio = 0.6;
-	light1->coord->x = -200;
-	light1->coord->y = 200;
-	light1->coord->z = 50;
+	light1->ratio = 0.2;
+	light1->coord->x = 0;
+	light1->coord->y = 5;
+	light1->coord->z = 0;
 	return (light1);
 }

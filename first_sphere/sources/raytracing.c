@@ -6,7 +6,7 @@
 /*   By: syl <syl@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/18 11:55:44 by sforster          #+#    #+#             */
-/*   Updated: 2024/12/20 23:14:57 by syl              ###   ########.fr       */
+/*   Updated: 2024/12/25 17:26:53 by syl              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,16 +80,17 @@ void TraceRay(t_pix *pix)
 		}
 		if (closest_sphere == NULL)
 		{
-			pix->color = pix->global->backgroundcolor;
+			
+			pix->color = pix->global->backgroundcolor;	
 			return ;
 		}
 		// ici ajouter pour calculer la lumiere....
-		ComputeLighting(pix, closestt, closest_sphere);
-		//pix->color = closest_sphere->color;
+//		ComputeLighting(pix, closestt, closest_sphere);
+		
+		pix->color = closest_sphere->color;
 		i++;
 	}
 }
-
 
 void IntersectRaySphere(t_pix *pix, t_sphere *sphere)
 {

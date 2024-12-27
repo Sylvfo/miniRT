@@ -6,7 +6,7 @@
 /*   By: syl <syl@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/18 09:31:43 by sforster          #+#    #+#             */
-/*   Updated: 2024/12/20 19:42:32 by syl              ###   ########.fr       */
+/*   Updated: 2024/12/21 15:44:19 by syl              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,8 @@ t_view	*init_global(void)
 	global->view_height = 1500; // ?????????
 	global->scene = malloc(sizeof(t_scene));
 	global->Vz = 100;
-	global->backgroundcolor = 29565; //1644825;
+	global->backgroundcolor = 1644825; //0xFF9933;
+	//global->backgroundcolor = 29565; //1644825;
 	global->cam->x = 0;
 	global->cam->y = 0;
 	global->cam->z = 0;

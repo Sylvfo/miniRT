@@ -6,7 +6,7 @@
 /*   By: syl <syl@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 11:03:17 by sforster          #+#    #+#             */
-/*   Updated: 2024/12/20 23:11:54 by syl              ###   ########.fr       */
+/*   Updated: 2024/12/26 20:25:04 by syl              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,11 +26,14 @@ typedef struct s_3dpoint {
 	float   z;
 } t_3dpoint;
 
-typedef struct s_vect3d {
+typedef struct s_vect3d { //vector
 	float	x;
 	float	y;
 	float   z;
 } t_vect3d;
+//square root 
+// length
+
 
 typedef struct	s_sphere {
 	t_3dpoint		*center;
@@ -40,7 +43,7 @@ typedef struct	s_sphere {
 
 typedef struct s_spotlight { //bulb??
 	t_3dpoint	*coord;
-	int			ratio;
+	float		ratio;
 //	int			color;	not in mandatory part
 } t_spotlight;
 
@@ -60,8 +63,8 @@ typedef struct	s_cyl {
 
 typedef struct s_scene {
 	t_sphere	**sphere;
-	int		ambiant_light_ratio;
-	int		ambiant_light_color;
+	float		ambient_light_ratio;
+	float		ambient_light_color;
 	t_spotlight *light1;
 	//autres formes
 } t_scene;
@@ -144,7 +147,12 @@ t_3dpoint *pointonline(t_pix *pix, float closestt);
 float ComputeLighting(t_pix *pix, float closestt, t_sphere *closest_sphere);
 float light_intensity(t_3dpoint *P, t_vect3d *N, t_pix *pix);
 float 	compute_spotlight(t_3dpoint *P, t_vect3d *N, t_pix *pix, t_spotlight *light);
+
 float 	compute_ambient(t_pix *pix);
 
+//bitwise.c
+int modify_color(int color, float intensity);
 
+//print
+void print3dvect(t_vect3d *va);
 #endif
