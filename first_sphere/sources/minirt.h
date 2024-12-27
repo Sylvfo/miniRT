@@ -6,7 +6,7 @@
 /*   By: syl <syl@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 11:03:17 by sforster          #+#    #+#             */
-/*   Updated: 2024/12/27 12:09:28 by syl              ###   ########.fr       */
+/*   Updated: 2024/12/27 17:33:48 by syl              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,9 @@
 # include <stdio.h>
 # include <stdlib.h>
 # include <limits.h>
+
+# define RAY_T_MIN 0.0001f // not to interract with the last object touched. no neg value. 1 is for safety
+# define RAY_T_MAX 0.0e30f // really large floating number. So it means 1.0 × 10³⁰ (10 puissance 30) 1 suivi de 30 zeros
 
 typedef struct s_3dpoint {
 	float	x;
@@ -33,7 +36,6 @@ typedef struct s_vect3d { //vector
 } t_vect3d;
 //square root 
 // length
-
 
 typedef struct	s_sphere {
 	t_3dpoint		*center;
@@ -70,7 +72,7 @@ typedef struct s_scene {
 	//autres formes
 } t_scene;
 
-typedef struct	s_view {
+typedef struct	s_view {//global
 	t_3dpoint	*cam;
 	float	caneva_width;
 	float	caneva_height;
@@ -92,7 +94,7 @@ typedef struct	s_pix {
 	t_scene		*scene;
 	float		t1;
 	float		t2;
-	float		light_int;
+//	float		light_int;
 } t_pix;
 
 typedef struct s_image {
@@ -142,7 +144,7 @@ t_vect3d *vect_from_points(t_3dpoint *a, t_3dpoint *b);
 float	lenght_vector(t_vect3d *vect);
 void normalize_vector(t_vect3d *vect);
 t_3dpoint *pointonline(t_pix *pix, float closestt);
-
+t_vect3d	*substraction_point(t_3dpoint *a, t_3dpoint *b);
 
 //light.c
 float ComputeLighting(t_pix *pix, float closestt, t_sphere *closest_sphere);
@@ -152,7 +154,11 @@ float 	compute_spotlight(t_3dpoint *P, t_vect3d *N, t_pix *pix, t_spotlight *lig
 float 	compute_ambient(t_pix *pix);
 
 //bitwise.c
-int modify_color(int color, float intensity);
+unsigned int modify_color(int color, float intensity);
+
+//intersect
+void intersectrayplane(t_pix *pix, t_plane *plane);
+
 
 //print
 void print3dvect(t_vect3d *va);

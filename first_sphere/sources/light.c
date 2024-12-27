@@ -6,7 +6,7 @@
 /*   By: syl <syl@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/20 19:26:51 by syl               #+#    #+#             */
-/*   Updated: 2024/12/21 16:29:12 by syl              ###   ########.fr       */
+/*   Updated: 2024/12/27 17:40:53 by syl              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,12 +22,12 @@ float ComputeLighting(t_pix *pix, float closestt, t_sphere *closest_sphere)
 	N = malloc(sizeof(t_vect3d));
 
 	P = pointonline(pix, closestt);
-	N = vect_from_points(closest_sphere->center, P);
-//	N = vect_from_points(P, closest_sphere->center);
+//	N = vect_from_points(closest_sphere->center, P);
+	N = vect_from_points(P, closest_sphere->center);
 	//problem avec ce N!!
 	normalize_vector(N);
 //	print3dvect(N);
-//	intensity = compute_ambient(pix);
+	intensity = compute_ambient(pix);
 	intensity = light_intensity(P, N, pix);
 //	pix->color = closest_sphere->color;
 	pix->color = modify_color(closest_sphere->color, intensity);

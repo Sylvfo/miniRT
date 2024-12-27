@@ -6,7 +6,7 @@
 /*   By: syl <syl@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/19 13:28:57 by sforster          #+#    #+#             */
-/*   Updated: 2024/12/26 20:21:56 by syl              ###   ########.fr       */
+/*   Updated: 2024/12/27 16:12:48 by syl              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,6 @@ float	lenght_vector(t_vect3d *vect)
 	length = sqrt((vect->x * vect->x) + (vect->y * vect->y) + (vect->z * vect->z));
 	return (length);	
 }
-
-
 
 void normalize_vector(t_vect3d *vect)
 {
@@ -77,6 +75,17 @@ t_vect3d	*addition(t_vect3d *a, t_vect3d *b)
 	new_vect->y = a->y + b->y;
 	new_vect->z = a->z + b->z;
 	return (new_vect);
+}
+
+t_vect3d	*substraction_point(t_3dpoint *a, t_3dpoint *b)
+{
+	t_vect3d	*new_p;
+
+	new_p = malloc(sizeof(t_vect3d));
+	new_p->x = a->x - b->x;
+	new_p->y = a->y - b->y;
+	new_p->z = a->z - b->z;
+	return (new_p);
 }
 
 t_vect3d	*substraction(t_vect3d *a, t_vect3d *b)

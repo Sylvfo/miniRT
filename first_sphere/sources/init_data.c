@@ -6,7 +6,7 @@
 /*   By: syl <syl@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/18 09:31:43 by sforster          #+#    #+#             */
-/*   Updated: 2024/12/21 15:44:19 by syl              ###   ########.fr       */
+/*   Updated: 2024/12/27 22:21:21 by syl              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@ t_pix ***init_pix(t_pix ***pix, t_view *global)
             if (!pix[x][y])
                 return NULL;//free...
 			pix[x][y]->D = malloc(sizeof(t_vect3d));
+//			pix[x][y]->t1 = RAY_T_MAX;
  //           pix[x][y]->global = global;
 			y++;
 		}
@@ -71,12 +72,12 @@ t_view	*init_global(void)
 		return (NULL);
 	global->cam = malloc(sizeof(t_3dpoint));
 	global->caneva_width = 1500;
-	global->caneva_height = 1000;
-	global->view_width = 2000; // ?????
-	global->view_height = 1500; // ?????????
+	global->caneva_height = 1200;
+	global->view_width = 1500; // ?????
+	global->view_height = 1200; // ?????????
 	global->scene = malloc(sizeof(t_scene));
-	global->Vz = 100;
-	global->backgroundcolor = 1644825; //0xFF9933;
+	global->Vz = 400;
+	global->backgroundcolor = 0x00cccc;
 	//global->backgroundcolor = 29565; //1644825;
 	global->cam->x = 0;
 	global->cam->y = 0;
