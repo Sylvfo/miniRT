@@ -6,7 +6,7 @@
 /*   By: syl <syl@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 11:03:17 by sforster          #+#    #+#             */
-/*   Updated: 2024/12/26 20:25:04 by syl              ###   ########.fr       */
+/*   Updated: 2024/12/27 12:09:28 by syl              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ typedef struct s_spotlight { //bulb??
 
 typedef struct	s_plane {
 	t_3dpoint		*point;
-	t_vect3d		*directions;
+	t_vect3d		*normal; // normal, so 90° from the point
 	int				color;
 }	t_plane;
 
@@ -65,6 +65,7 @@ typedef struct s_scene {
 	t_sphere	**sphere;
 	float		ambient_light_ratio;
 	float		ambient_light_color;
+	t_plane		*plane;
 	t_spotlight *light1;
 	//autres formes
 } t_scene;

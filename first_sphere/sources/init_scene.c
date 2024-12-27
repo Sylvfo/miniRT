@@ -6,7 +6,7 @@
 /*   By: syl <syl@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/20 18:31:47 by syl               #+#    #+#             */
-/*   Updated: 2024/12/27 11:10:12 by syl              ###   ########.fr       */
+/*   Updated: 2024/12/27 12:11:59 by syl              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,17 @@ t_scene *init_scene(void)
 	scene->sphere[3]->radius = 25;
 
 	scene->light1 = init_lights();
+
+	scene->plane = malloc(sizeof(t_plane));
+	scene->plane->point = malloc(sizeof(t_3dpoint));
+	scene->plane->point->x = 10;
+	scene->plane->point->y = 20;
+	scene->plane->point->z = 20;
+	scene->plane->normal = malloc(sizeof(t_vect3d));
+	scene->plane->normal->x = 0;
+	scene->plane->normal->y = 1;
+	scene->plane->normal->z = 0;
+
 	
 	scene->ambient_light_ratio = 1;
 //	scene->ambient_light_color = 0.5;
